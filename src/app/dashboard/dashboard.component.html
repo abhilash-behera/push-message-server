@@ -1,0 +1,57 @@
+<div style="background-color: #f3f3f3;padding-bottom: 1%">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Truth Developers</span>
+      <span class="example-spacer"></span>
+      <button mat-button (click)="logout()">
+          <mat-icon class="example-icon">power_settings_new</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-card class="col-lg-4 col-md-6 col-sm-10" style="margin:auto;margin-top:3%">
+    <mat-card-title style="text-align:center">
+      <mat-icon color="primary" style="margin:auto;text-align: center;width:100%;font-size: 3em">notifications_active</mat-icon>
+      Send a notification
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="notificationForm" (ngSubmit)="submitNotificationForm()">
+        <mat-form-field style="width:100%">
+          <input matInput style="font-size: 1.2em" formControlName="title" type="text" placeholder="Title">
+          <mat-error *ngIf="title.errors?.required&&title.touched">Title is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="width:100%">
+          <input style="font-size: 1.2em" matInput formControlName="message" type="text" placeholder="Message">
+          <mat-error *ngIf="message.errors?.required&&message.touched">Message is required</mat-error>
+        </mat-form-field>
+
+        <br>
+        <p style="font-size: 1.3em">Select the apps for sending notification:</p>
+        <mat-error *ngIf="(!(footballPredictions.value || epicPredictions.value || coolPredictions.value) && (footballPredictions.touched || epicPredictions.touched || coolPredictions.touched))||isAppsError">
+          Select at least one app
+        </mat-error>
+        <mat-list formGroupName="apps">
+          <mat-list-item>
+            <mat-checkbox (change)="isAppsError=false" formControlName="footballPredictions">
+              Football Predictions
+            </mat-checkbox>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-checkbox (change)="isAppsError=false" formControlName="epicPredictions">
+              Epic Predictions
+            </mat-checkbox>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-checkbox (change)="isAppsError=false" formControlName="coolPredictions">
+              Cool Predictions
+            </mat-checkbox>
+          </mat-list-item>
+        </mat-list>
+        <button [disabled]="sendButtonDisabled" type="submit" mat-raised-button color="primary" style="margin-top:2%;width:100%">Send</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
