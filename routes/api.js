@@ -37,6 +37,7 @@ mongoose.connect(mongodbUri, { useNewUrlParser: true, useCreateIndex: true }, (e
 router.post('/signup', (req, res) => {
     let userData = req.body;
     let user = new User(userData);
+    console.log('new user: ',user);
     user.save((err) => {
         if (err) {
             console.log('Error in creating new user: ', err);
