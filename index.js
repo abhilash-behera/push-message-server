@@ -1,7 +1,7 @@
 /*jslint es6 */
 const express = require('express');
 const bodyParser = require('body-parser');
-const PORT = 80;
+const PORT = 8080;
 
 const app = express();
 const api = require('./routes/api');
